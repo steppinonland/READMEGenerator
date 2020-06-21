@@ -39,15 +39,24 @@ inquirer.prompt(questions).then(function(data) {
     var fileName = data.title.toLowerCase().split(' ').join('') + ".md";
     var titleEl = `#Repository Name: ${data.title}`;
     var TOC = '\n'+`${data.title}: Table of Contents:`+'\n'+ `* Dependencies`+'\n'+ `* What the User needs to know`+'\n'+`* How to Contribute to Repo`+'\n'+`* Tests`+'\n'+`* Questions`;
-    var license = '\n'+'![license]'+`(https://img.shields.io/badge/license-${data.license}-<COLOR>)`;
+    var license = data.license;
+    var badge = '\n'+`![GitHub license](https://img.shields.io/badge/license-${license}-blue.svg)`
     var dependencies = '\n'+'\n'+`Command to install dependencies: ${data.dependencies}`;
     var know = '\n'+'\n'+`What you need to know when using this repo: ${data.n2k}`;
     var contribute = '\n'+'\n'+`What you need to know when contributing to this repo: ${data.contribute}`;
-    fs.writeFile(fileName, [titleEl + license + TOC + dependencies + know + contribute], (err) => {
+    fs.writeFile(fileName, [titleEl + badge + TOC + dependencies + know + contribute], (err) => {
         if (err) {
             console.log(err);
         } else {
+            renderLicenseBadge(data.license)
             console.log("Your README has been generated.");
         }
     });
   });
+  function renderLicenseBadge(license) {
+    if (license !== "None") {
+    return `![GitHub license](https://img.shields.io/badge/license-${license}-blue.svg)`
+    }
+    return ''
+   }
+  
