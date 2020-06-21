@@ -38,7 +38,7 @@ var fs = require("fs")
 inquirer.prompt(questions).then(function(data) {
     var fileName = data.title.toLowerCase().split(' ').join('') + ".md";
     var titleEl = `# Repository Name: ${data.title}`;
-    var TOC = '\n'+'\n'+`${data.title}: Table of Contents:`+'\n'+ `* Dependencies`+'\n'+ `* What the User needs to know`+'\n'+`* How to Contribute to Repo`+'\n'+`* Tests`+'\n'+`* Questions`;
+    var TOC = '\n'+'\n'+`## ${data.title}: Table of Contents:`+'\n'+ `* Dependencies`+'\n'+ `* What the User needs to know`+'\n'+`* How to Contribute to Repo`+'\n'+`* Tests`+'\n'+`* Questions`;
     var license = data.licenses;
     var badge = '\n'+`![GitHub license](https://img.shields.io/badge/license-${license}-blue.svg)`
     var dependencies = '\n'+'\n'+`Command to install dependencies: ${data.dependencies}`;
